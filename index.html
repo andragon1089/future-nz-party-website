@@ -1,0 +1,604 @@
+<!--
+  ============================================================
+  MODEL NEW ZEALAND POLITICAL PARTY WEBSITE — EDITING GUIDE
+  ============================================================
+  This is a single self-contained HTML file (HTML + CSS + JS,
+  no build step, no dependencies). It is safe to publish as-is
+  on GitHub Pages.
+
+  HOW TO EDIT THIS SITE
+  1. Open this file in GitHub's web-based editor (click the
+     pencil icon on the file in your repository) or any text
+     editor.
+  2. Search for the word EDIT. Every comment starting with
+     "EDIT:" sits just above a piece of placeholder text —
+     type your real content over the placeholder text.
+  3. Some blocks are marked "REPEATABLE". These can be copied
+     and pasted to add more of the same thing (another team
+     member, another coalition partner, another policy
+     critique). Select the whole block named in the comment,
+     copy it, paste the copy directly below the original, then
+     edit the text inside your new copy.
+  4. IMAGES: nothing is uploaded through the site itself. Every
+     photo/logo placeholder is an empty src="" on an <img> tag.
+     To add a real image, either:
+       a) paste a direct image URL between the quotes, e.g.
+          src="https://example.com/photo.jpg", or
+       b) add an "images" folder to this same GitHub repository,
+          upload your image file into it, and use a relative
+          path, e.g. src="images/logo.png" or
+          src="images/team/hana.jpg".
+     If an image is left blank or fails to load, it is simply
+     hidden (onerror="this.style.display='none'") so no broken
+     image icon ever shows — the dashed placeholder frame
+     underneath stays visible instead.
+  5. Colours and fonts are set once, as CSS variables near the
+     top of the <style> section below (search for :root) —
+     change them there to re-theme the whole site in one go.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- EDIT: the text below appears in the browser tab -->
+<title>Party Name — Model Political Party</title>
+<!-- EDIT: short description of the site (not shown on the page itself) -->
+<meta name="description" content="Model political party website, built for a school project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  /* ============================================================
+     COLOUR & FONT VARIABLES — change these to re-theme the site
+     ============================================================ */
+  :root{
+    --navy: #0B2545;        /* primary dark navy — nav, hero, footer */
+    --ink: #1B2A41;         /* body text colour */
+    --gold: #C7A034;        /* accent gold — borders, icons, rules */
+    --gold-dark: #8C6D1F;   /* deeper gold — text-safe on light backgrounds */
+    --bg: #EAF2FA;          /* light blue page background */
+    --panel: #FFFFFF;       /* white section / card background */
+    --line: #D3E1F0;        /* subtle border colour on light backgrounds */
+    --line-on-navy: rgba(255,255,255,0.22);
+    --radius: 3px;
+    --nav-height: 76px;
+    --font-head: 'Fraunces', Georgia, serif;
+    --font-body: 'Public Sans', Arial, sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *, *::before, *::after{
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  h1,h2,h3,h4{ font-family: var(--font-head); color: var(--navy); margin: 0 0 0.5em; font-weight: 700; line-height: 1.15; }
+  p{ margin: 0 0 1em; }
+  a{ color: inherit; }
+  img{ max-width: 100%; display: block; }
+  ul{ margin: 0; }
+
+  :focus-visible{ outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  .skip-link{
+    position: absolute; left: -999px; top: 0;
+    background: var(--navy); color: #fff; padding: 10px 18px;
+    z-index: 1000; border-radius: 0 0 4px 0; font-weight: 600; text-decoration: none;
+  }
+  .skip-link:focus{ left: 0; }
+
+  section[id]{ scroll-margin-top: calc(var(--nav-height) + 14px); }
+
+  /* ============================================================
+     NAVIGATION
+     ============================================================ */
+  .site-nav{
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy);
+    border-bottom: 3px solid var(--gold);
+  }
+  .nav-inner{
+    max-width: 1120px; margin-inline: auto; padding-inline: clamp(20px,5vw,32px);
+    height: var(--nav-height);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .brand{ display: flex; align-items: center; gap: 12px; min-width: 0; }
+
+  .logo-frame{
+    position: relative; width: 44px; height: 44px; flex: none;
+    border: 1.5px dashed var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.05);
+  }
+  .logo-frame .logo-fallback{
+    font-size: 9px; letter-spacing: 0.04em; color: var(--gold); font-weight: 600;
+  }
+  .logo-frame img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #fff; }
+
+  .brand-name{
+    font-family: var(--font-head); font-weight: 700; color: #fff;
+    font-size: clamp(16px,2.4vw,20px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .nav-toggle{ display: none; }
+
+  .nav-links{ list-style: none; display: flex; gap: clamp(10px,2vw,28px); margin: 0; padding: 0; }
+  .nav-links a{
+    display: inline-block;
+    text-decoration: none; color: #EAF2FA; font-weight: 500; font-size: 15px;
+    padding: 6px 2px; border-bottom: 2px solid transparent;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{ border-bottom-color: var(--gold); color: #fff; }
+
+  @media (max-width: 760px){
+    .nav-toggle{
+      display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+      width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 0;
+    }
+    .nav-toggle .bar{ width: 22px; height: 2px; background: #fff; display: block; }
+    .nav-links{
+      position: absolute; top: var(--nav-height); left: 0; right: 0;
+      background: var(--navy); flex-direction: column; gap: 0;
+      max-height: 0; overflow: hidden; border-bottom: 0 solid var(--gold);
+      transition: max-height 0.25s ease;
+    }
+    .nav-links.open{ max-height: 360px; border-bottom-width: 3px; }
+    .nav-links a{ display: block; padding: 14px clamp(20px,5vw,32px); border-bottom: 1px solid var(--line-on-navy); }
+  }
+
+  /* ============================================================
+     SHARED SECTION / HEADING STYLES
+     ============================================================ */
+  .section{ padding-block: clamp(56px,8vw,96px); }
+  .section-white{ background: var(--panel); }
+  .container{ max-width: 1120px; margin-inline: auto; padding-inline: clamp(20px,5vw,32px); }
+
+  .section-heading{ display: flex; align-items: center; gap: 12px; margin-bottom: 1.2em; }
+  .mark-icon{ width: 26px; height: 26px; color: var(--gold); flex: none; }
+  .section-heading h2{ margin: 0; font-size: clamp(24px,3.4vw,34px); }
+
+  h3.sub-heading{ font-size: clamp(18px,2.2vw,22px); margin-top: 2.2em; margin-bottom: 0.9em; }
+  h3.sub-heading:first-of-type{ margin-top: 0; }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{
+    position: relative; background: var(--navy); color: #fff; overflow: hidden;
+    padding-block: clamp(72px,12vw,140px);
+  }
+  .hero-watermark{
+    position: absolute; right: clamp(-30px,-2vw,10px); top: 50%; transform: translateY(-50%);
+    width: clamp(220px,34vw,420px); height: auto; color: var(--gold); opacity: 0.12; pointer-events: none;
+  }
+  .hero-inner{ position: relative; max-width: 640px; }
+  .hero h1{ color: #fff; font-size: clamp(40px,7vw,72px); margin-bottom: 0.2em; }
+  .hero .tagline{ font-size: clamp(18px,2.4vw,22px); color: #EAF2FA; max-width: 46ch; margin-bottom: 1.3em; font-weight: 400; }
+  .hero-rule{ width: 96px; height: 4px; background: var(--gold); margin-bottom: 1.3em; }
+  .hero .hero-sub{ color: rgba(255,255,255,0.85); max-width: 58ch; font-size: 16px; margin-bottom: 0; }
+
+  /* ============================================================
+     MANIFESTO
+     ============================================================ */
+  .prose{ max-width: 68ch; border-left: 3px solid var(--gold); padding-left: clamp(16px,3vw,28px); }
+  .prose p{ font-size: 17px; }
+
+  /* ============================================================
+     POLICIES
+     ============================================================ */
+  .critique-list{ display: grid; gap: 18px; margin-bottom: 0.5em; }
+  .critique{
+    background: var(--bg); border: 1px solid var(--line); border-left: 4px solid var(--gold-dark);
+    padding: 20px 24px; border-radius: var(--radius);
+  }
+  .critique-label{ font-weight: 700; color: var(--navy); font-size: 13px; margin-bottom: 0.2em; }
+  .critique-text{ margin-bottom: 1em; }
+  .critique-text:last-child{ margin-bottom: 0; }
+
+  .policy-area{ border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 16px; background: var(--bg); }
+  .policy-area summary{
+    list-style: none; cursor: pointer; padding: 18px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    font-family: var(--font-head); font-weight: 700; color: var(--navy); font-size: 19px;
+  }
+  .policy-area summary::-webkit-details-marker{ display: none; }
+  .policy-area summary .toggle-mark{ font-family: var(--font-body); font-size: 24px; color: var(--gold-dark); flex: none; line-height: 1; }
+  .policy-area summary .toggle-mark::after{ content: "+"; }
+  .policy-area[open] summary .toggle-mark::after{ content: "\2013"; }
+  .policy-area[open] summary{ border-bottom: 1px solid var(--line); }
+  .policy-content{ padding: 4px 24px 24px; }
+  .policy-content h4{
+    font-family: var(--font-body); font-size: 14px; letter-spacing: 0.01em;
+    color: var(--gold-dark); margin-top: 1.3em; margin-bottom: 0.3em; font-weight: 700;
+  }
+  .policy-content h4:first-of-type{ margin-top: 0.6em; }
+  .policy-content p{ font-size: 15.5px; }
+
+  /* ============================================================
+     COALITION
+     ============================================================ */
+  .coalition-grid{ display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 22px; }
+  .coalition-card{
+    background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--gold);
+    padding: 22px 22px 24px; border-radius: var(--radius);
+  }
+  .coalition-card h3{ font-size: 19px; margin-bottom: 0.4em; }
+  .coalition-card p{ font-size: 15px; margin: 0; }
+
+  /* ============================================================
+     TEAM
+     ============================================================ */
+  .photo-strip{ display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 3em; }
+  .strip-frame{ flex: none; width: clamp(140px,22vw,190px); }
+  .strip-frame .photo-frame{ aspect-ratio: 4/3; }
+  .frame-caption{ font-size: 12px; color: var(--navy); opacity: 0.7; margin-top: 6px; text-align: center; }
+
+  .photo-frame{
+    position: relative; background: var(--panel); border: 1.5px dashed var(--gold-dark);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .photo-frame .frame-label{ font-size: 13px; color: var(--gold-dark); font-weight: 600; }
+  .photo-frame img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  .team-grid{ display: grid; grid-template-columns: repeat(auto-fill,minmax(230px,1fr)); gap: 26px; }
+  .team-card{ background: var(--bg); border: 1px solid var(--line); padding: 20px; border-radius: var(--radius); }
+  .team-card .photo-frame{ aspect-ratio: 1/1; margin-bottom: 14px; }
+  .team-card h3{ font-size: 18px; margin-bottom: 0.15em; }
+  .team-card .role{ font-weight: 600; color: var(--gold-dark); font-size: 13px; margin-bottom: 0.6em; }
+  .team-card .bio{ font-size: 14.5px; margin: 0; }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .site-footer{ background: var(--navy); color: rgba(255,255,255,0.85); padding-block: 40px; border-top: 3px solid var(--gold); }
+  .footer-inner{
+    max-width: 1120px; margin-inline: auto; padding-inline: clamp(20px,5vw,32px);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; font-size: 14px;
+  }
+  .footer-inner strong{ display: block; color: #fff; font-family: var(--font-head); font-size: 16px; margin-bottom: 4px; }
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ============================================================
+     NAVIGATION — party name (EDIT in two places: here and in the
+     hero below) + placeholder logo frame + section links
+     ============================================================ -->
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <!-- EDIT: placeholder logo. Leave src="" blank, or add an
+           image URL / relative path such as images/logo.png
+           (see the image note at the very top of this file). -->
+      <div class="logo-frame">
+        <span class="logo-fallback">LOGO</span>
+        <img src="" alt="Party logo" onerror="this.style.display='none'">
+      </div>
+      <!-- EDIT: party name shown in the navigation bar -->
+      <span class="brand-name">Party Name</span>
+    </div>
+
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+
+    <nav aria-label="Main">
+      <ul class="nav-links" id="primary-nav">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#manifesto">Manifesto</a></li>
+        <li><a href="#policies">Policies</a></li>
+        <li><a href="#coalition">Coalition</a></li>
+        <li><a href="#team">Team</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ==========================================================
+       1. HOME
+       ========================================================== -->
+  <section id="home" class="hero">
+    <svg class="hero-watermark" viewBox="0 0 100 100" aria-hidden="true">
+      <rect x="6" y="6" width="88" height="88" rx="6" fill="none" stroke="currentColor" stroke-width="4"/>
+      <path d="M27 52 L44 69 L75 30" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="container hero-inner">
+      <!-- EDIT: party name, shown large as the page headline -->
+      <h1>Party Name</h1>
+      <!-- EDIT: a one-line tagline summing up what your party stands for -->
+      <p class="tagline">A one-line tagline that sums up what your party stands for.</p>
+      <div class="hero-rule" aria-hidden="true"></div>
+      <!-- EDIT: optional second line introducing the party and this election. Delete this paragraph if you don't need it. -->
+      <p class="hero-sub">One more sentence introducing your party and what it is campaigning on this election.</p>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       2. MANIFESTO
+       ========================================================== -->
+  <section id="manifesto" class="section">
+    <div class="container">
+      <div class="section-heading">
+        <svg class="mark-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M6.5 12.5l3.5 3.5 7-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h2>Our manifesto</h2>
+      </div>
+
+      <!-- EDIT: this is a long free-text block for your party's overall
+           vision and values. Replace each paragraph below with real
+           content — add or delete <p> paragraphs as you need. -->
+      <div class="prose">
+        <p>Paragraph 1: describe your party's overall vision for New Zealand — the big picture of the country you want to build.</p>
+        <p>Paragraph 2: describe the values and principles that guide your policies and how you make decisions.</p>
+        <p>Paragraph 3: describe the kind of change you want to see and why it matters right now.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       3. POLICIES
+       ========================================================== -->
+  <section id="policies" class="section section-white">
+    <div class="container">
+      <div class="section-heading">
+        <svg class="mark-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M6.5 12.5l3.5 3.5 7-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h2>Policies</h2>
+      </div>
+
+      <h3 class="sub-heading">Current policies — and why they don't work</h3>
+      <!-- EDIT: each block below pairs an existing/current policy with
+           your party's critique of it.
+           REPEATABLE BLOCK — to add another pair, copy one whole
+           <div class="critique"> ... </div> block, paste it below the
+           last one, then edit the text inside your copy. -->
+      <div class="critique-list">
+        <div class="critique">
+          <p class="critique-label">Current policy</p>
+          <p class="critique-text">Name and briefly describe an existing government policy.</p>
+          <p class="critique-label">Why it doesn't work</p>
+          <p class="critique-text">Explain the problem with this policy and who it affects.</p>
+        </div>
+        <div class="critique">
+          <p class="critique-label">Current policy</p>
+          <p class="critique-text">Name and briefly describe a second existing government policy.</p>
+          <p class="critique-label">Why it doesn't work</p>
+          <p class="critique-text">Explain why this policy falls short and who it affects.</p>
+        </div>
+      </div>
+
+      <h3 class="sub-heading">Our policy areas</h3>
+      <!-- EDIT: two expandable, long-form policy areas. Click a title
+           to expand or collapse it. Each has three parts — Overview,
+           Why it matters, and How we'll do it — so there's room for a
+           full written policy, not just a short summary. Feel free to
+           copy one whole <details class="policy-area">...</details>
+           block if you want to add a third policy area. -->
+      <details class="policy-area" open>
+        <summary>Policy area 1 title <span class="toggle-mark" aria-hidden="true"></span></summary>
+        <div class="policy-content">
+          <h4>Overview</h4>
+          <p>Describe this policy in plain terms and who it helps.</p>
+          <h4>Why it matters</h4>
+          <p>Explain the problem this policy solves and why it's urgent right now.</p>
+          <h4>How we'll do it</h4>
+          <p>Explain how you would implement this policy — funding, timeline, and the key steps involved.</p>
+        </div>
+      </details>
+
+      <details class="policy-area">
+        <summary>Policy area 2 title <span class="toggle-mark" aria-hidden="true"></span></summary>
+        <div class="policy-content">
+          <h4>Overview</h4>
+          <p>Describe this second policy in plain terms and who it helps.</p>
+          <h4>Why it matters</h4>
+          <p>Explain the problem this policy solves and why it's a priority.</p>
+          <h4>How we'll do it</h4>
+          <p>Explain how you would implement this policy — funding, timeline, and the key steps involved.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       4. POTENTIAL COALITION
+       ========================================================== -->
+  <section id="coalition" class="section">
+    <div class="container">
+      <div class="section-heading">
+        <svg class="mark-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M6.5 12.5l3.5 3.5 7-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h2>Potential coalition partners</h2>
+      </div>
+
+      <!-- EDIT: name other (real or model) parties your party could
+           realistically ally with, and why.
+           REPEATABLE BLOCK — to add another card, copy one whole
+           <div class="coalition-card"> ... </div> block, paste it
+           below the last one, then edit the text inside your copy. -->
+      <div class="coalition-grid">
+        <div class="coalition-card">
+          <h3>Name of a potential coalition partner</h3>
+          <p>Explain why your party could realistically work with them in government, and which policies you agree on.</p>
+        </div>
+        <div class="coalition-card">
+          <h3>Name a second potential coalition partner</h3>
+          <p>Explain the shared ground between your two parties and where you might still disagree.</p>
+        </div>
+        <div class="coalition-card">
+          <h3>Name a third potential coalition partner</h3>
+          <p>Explain what this partnership would offer voters and why it would be stable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       5. TEAM
+       ========================================================== -->
+  <section id="team" class="section section-white">
+    <div class="container">
+      <div class="section-heading">
+        <svg class="mark-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M6.5 12.5l3.5 3.5 7-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h2>Our team</h2>
+      </div>
+
+      <!-- EDIT: a strip of campaign/party photos.
+           REPEATABLE BLOCK — to add another photo, copy one whole
+           <div class="strip-frame"> ... </div> block, paste it after
+           the last one, then edit or add an image path inside it
+           (see the image note at the top of this file). -->
+      <div class="photo-strip">
+        <div class="strip-frame">
+          <div class="photo-frame">
+            <span class="frame-label">Campaign photo</span>
+            <img src="" alt="Campaign photo" onerror="this.style.display='none'">
+          </div>
+          <p class="frame-caption">Campaign photo</p>
+        </div>
+        <div class="strip-frame">
+          <div class="photo-frame">
+            <span class="frame-label">Campaign photo</span>
+            <img src="" alt="Campaign photo" onerror="this.style.display='none'">
+          </div>
+          <p class="frame-caption">Campaign photo</p>
+        </div>
+        <div class="strip-frame">
+          <div class="photo-frame">
+            <span class="frame-label">Campaign photo</span>
+            <img src="" alt="Campaign photo" onerror="this.style.display='none'">
+          </div>
+          <p class="frame-caption">Campaign photo</p>
+        </div>
+        <div class="strip-frame">
+          <div class="photo-frame">
+            <span class="frame-label">Campaign photo</span>
+            <img src="" alt="Campaign photo" onerror="this.style.display='none'">
+          </div>
+          <p class="frame-caption">Campaign photo</p>
+        </div>
+      </div>
+
+      <!-- EDIT: individual team member cards — name, role, short bio,
+           and an optional photo.
+           REPEATABLE BLOCK — to add another member, copy one whole
+           <article class="team-card"> ... </article> block, paste it
+           after the last one, then edit the text (and image, if you
+           want one) inside your copy. -->
+      <div class="team-grid">
+        <article class="team-card">
+          <div class="photo-frame">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Photo of this team member" onerror="this.style.display='none'">
+          </div>
+          <h3>Full name</h3>
+          <p class="role">Role, e.g. Party Leader</p>
+          <p class="bio">One or two sentences about this person's background and why they're standing.</p>
+        </article>
+
+        <article class="team-card">
+          <div class="photo-frame">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Photo of this team member" onerror="this.style.display='none'">
+          </div>
+          <h3>Full name</h3>
+          <p class="role">Role, e.g. Deputy Leader</p>
+          <p class="bio">One or two sentences about this person's background and why they're standing.</p>
+        </article>
+
+        <article class="team-card">
+          <div class="photo-frame">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Photo of this team member" onerror="this.style.display='none'">
+          </div>
+          <h3>Full name</h3>
+          <p class="role">Role, e.g. Policy Spokesperson</p>
+          <p class="bio">One or two sentences about this person's background and why they're standing.</p>
+        </article>
+
+        <article class="team-card">
+          <div class="photo-frame">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Photo of this team member" onerror="this.style.display='none'">
+          </div>
+          <h3>Full name</h3>
+          <p class="role">Role, e.g. Candidate</p>
+          <p class="bio">One or two sentences about this person's background and why they're standing.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <!-- EDIT: party name, repeated in the footer -->
+      <strong>Party Name</strong>
+      <!-- EDIT: short footer note -->
+      <span>This is a model political party website, created for a school project.</span>
+    </div>
+    <div>
+      <!-- EDIT: optional contact placeholder, or delete this line -->
+      <span>Contact: name@example.com</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile navigation toggle. Vanilla JS only, no external libraries.
+  (function () {
+    var toggle = document.querySelector('.nav-toggle');
+    var links = document.getElementById('primary-nav');
+    if (!toggle || !links) return;
+
+    toggle.addEventListener('click', function () {
+      var isOpen = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    links.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
