@@ -96,12 +96,11 @@ section[id]{ scroll-margin-top: calc(var(--nav-height) + 14px); }
 
 .logo-frame{
   position: relative; width: 44px; height: 44px; flex: none;
-  border: 1.5px dashed var(--gold);
   display: flex; align-items: center; justify-content: center;
-  background: rgba(255,255,255,0.05);
+  background: #0B2545;
 }
 .logo-frame .logo-fallback{ font-size: 9px; letter-spacing: 0.04em; color: var(--gold); font-weight: 600; }
-.logo-frame img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #fff; }
+.logo-frame img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #0B2545; }
 
 .brand-name{
   font-family: var(--font-head); font-weight: 700; color: #fff;
