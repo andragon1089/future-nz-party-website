@@ -1,0 +1,123 @@
+<!-- This page shares styles.css and script.js with the rest of the
+     site, and follows the same EDIT / REPEATABLE comment system.
+     See index.html for the full editing guide. -->
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- EDIT: the text below appears in the browser tab -->
+<title>Potential Coalition — Party Name</title>
+<meta name="description" content="Model political party website, built for a school project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <div class="logo-frame">
+        <span class="logo-fallback">LOGO</span>
+        <img src="" alt="Party logo" onerror="this.style.display='none'">
+      </div>
+      <span class="brand-name">Party Name</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+
+    <nav aria-label="Main">
+      <ul class="nav-links" id="primary-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="manifesto.html">Manifesto</a></li>
+        <li><a href="policies.html">Policies</a></li>
+        <li><a href="coalition.html">Coalition</a></li>
+        <li><a href="team.html">Team</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <header class="page-header">
+    <div class="container">
+      <svg class="mark-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M6.5 12.5l3.5 3.5 7-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>Potential coalition partners</h1>
+    </div>
+  </header>
+
+  <section class="section section-white">
+    <div class="container">
+
+      <!-- EDIT: a wide photo for the top of the coalition page. -->
+      <div class="photo-frame page-banner reveal">
+        <span class="frame-label">Photo</span>
+        <img src="" alt="Photo for the coalition page" onerror="this.style.display='none'">
+      </div>
+
+      <!-- EDIT: name other (real or model) parties your party could
+           realistically ally with, and why, each with a small logo.
+           REPEATABLE BLOCK — to add another card, copy one whole
+           <div class="coalition-card"> ... </div> block, paste it
+           below the last one, then edit the text (and logo) inside
+           your copy. -->
+      <div class="coalition-grid stagger">
+        <div class="coalition-card reveal">
+          <div class="photo-frame card-media">
+            <span class="frame-label">Logo</span>
+            <img src="" alt="Logo of this potential coalition partner" onerror="this.style.display='none'">
+          </div>
+          <h3>Name of a potential coalition partner</h3>
+          <p>Explain why your party could realistically work with them in government, and which policies you agree on.</p>
+        </div>
+        <div class="coalition-card reveal">
+          <div class="photo-frame card-media">
+            <span class="frame-label">Logo</span>
+            <img src="" alt="Logo of this potential coalition partner" onerror="this.style.display='none'">
+          </div>
+          <h3>Name a second potential coalition partner</h3>
+          <p>Explain the shared ground between your two parties and where you might still disagree.</p>
+        </div>
+        <div class="coalition-card reveal">
+          <div class="photo-frame card-media">
+            <span class="frame-label">Logo</span>
+            <img src="" alt="Logo of this potential coalition partner" onerror="this.style.display='none'">
+          </div>
+          <h3>Name a third potential coalition partner</h3>
+          <p>Explain what this partnership would offer voters and why it would be stable.</p>
+        </div>
+      </div>
+
+      <nav class="page-flow" aria-label="Page navigation">
+        <a class="prev" href="policies.html">&larr; Policies</a>
+        <a class="next" href="team.html">Team &rarr;</a>
+      </nav>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <strong>Party Name</strong>
+      <span>This is a model political party website, created for a school project.</span>
+    </div>
+    <div>
+      <span>Contact: name@example.com</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

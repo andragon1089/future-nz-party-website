@@ -1,0 +1,213 @@
+<!--
+  ============================================================
+  MODEL NEW ZEALAND POLITICAL PARTY WEBSITE — EDITING GUIDE
+  ============================================================
+  This site is now several small HTML files that share two
+  files for design and behaviour:
+
+    index.html        — Home (this file)
+    manifesto.html     — Manifesto
+    policies.html      — Policies
+    coalition.html     — Potential coalition
+    team.html          — Team
+    styles.css         — colours, fonts and layout for every page
+    script.js          — mobile menu, page-scroll animation
+
+  All seven files need to sit in the same folder for the site to
+  work (e.g. all seven in the root of your GitHub repository).
+
+  HOW TO EDIT THIS SITE
+  1. Open any of the five .html files above in GitHub's
+     web-based editor (click the pencil icon on the file) or
+     any text editor.
+  2. Search for the word EDIT. Every comment starting with
+     "EDIT:" sits just above a piece of placeholder text —
+     type your real content over the placeholder text.
+  3. Some blocks are marked "REPEATABLE". These can be copied
+     and pasted to add more of the same thing (another team
+     member, another coalition partner, another policy
+     critique, another photo). Select the whole block named in
+     the comment, copy it, paste the copy directly below the
+     original, then edit the text inside your new copy.
+  4. IMAGES: nothing is uploaded through the site itself. Every
+     photo/logo placeholder is an empty src="" on an <img> tag.
+     To add a real image, either:
+       a) paste a direct image URL between the quotes, e.g.
+          src="https://example.com/photo.jpg", or
+       b) add an "images" folder to this same GitHub repository,
+          upload your image file into it, and use a relative
+          path, e.g. src="images/logo.png" or
+          src="images/team/hana.jpg".
+     If an image is left blank or fails to load, it is simply
+     hidden (onerror="this.style.display='none'") so no broken
+     image icon ever shows — the dashed placeholder frame
+     underneath stays visible instead.
+  5. Colours and fonts are set once, as CSS variables near the
+     top of styles.css (search for :root) — change them there
+     to re-theme every page at once.
+  6. Do not rename the five .html files unless you also update
+     the matching href="..." links in the navigation menu and
+     in the "Continue to..." links at the bottom of each page —
+     they are plain filenames, e.g. href="policies.html".
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- EDIT: the text below appears in the browser tab -->
+<title>Party Name — Model Political Party</title>
+<!-- EDIT: short description of the site (not shown on the page itself) -->
+<meta name="description" content="Model political party website, built for a school project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ============================================================
+     NAVIGATION — identical block at the top of every page.
+     EDIT the party name and logo once here, then copy this whole
+     <header class="site-nav">...</header> block over the one in
+     the other four pages so they all match.
+     ============================================================ -->
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <!-- EDIT: placeholder logo. Leave src="" blank, or add an
+           image URL / relative path such as images/logo.png
+           (see the image note at the top of this file). -->
+      <div class="logo-frame">
+        <span class="logo-fallback">LOGO</span>
+        <img src="" alt="Party logo" onerror="this.style.display='none'">
+      </div>
+      <!-- EDIT: party name shown in the navigation bar -->
+      <span class="brand-name">Party Name</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+
+    <nav aria-label="Main">
+      <ul class="nav-links" id="primary-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="manifesto.html">Manifesto</a></li>
+        <li><a href="policies.html">Policies</a></li>
+        <li><a href="coalition.html">Coalition</a></li>
+        <li><a href="team.html">Team</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ==========================================================
+       HERO
+       ========================================================== -->
+  <section class="hero">
+    <svg class="hero-watermark" viewBox="0 0 100 100" aria-hidden="true">
+      <rect x="6" y="6" width="88" height="88" rx="6" fill="none" stroke="currentColor" stroke-width="4"/>
+      <path d="M27 52 L44 69 L75 30" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="container hero-inner">
+      <!-- EDIT: party name, shown large as the page headline -->
+      <h1>Party Name</h1>
+      <!-- EDIT: a one-line tagline summing up what your party stands for -->
+      <p class="tagline">A one-line tagline that sums up what your party stands for.</p>
+      <div class="hero-rule" aria-hidden="true"></div>
+      <!-- EDIT: optional second line introducing the party and this election. Delete this paragraph if you don't need it. -->
+      <p class="hero-sub">One more sentence introducing your party and what it is campaigning on this election.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- EDIT: a wide campaign photo for the home page. See the
+           image note at the top of this file. -->
+      <div class="photo-frame page-banner reveal">
+        <span class="frame-label">Campaign photo</span>
+        <img src="" alt="Campaign photo" onerror="this.style.display='none'">
+      </div>
+
+      <!-- EDIT: this grid links to the site's other four pages.
+           REPEATABLE BLOCK — if you add a whole new page to the
+           site, copy one whole <a class="preview-card">...</a>
+           block, paste it after the last one, then edit the
+           link, image, title and one-line description inside it. -->
+      <div class="preview-grid stagger">
+        <a class="preview-card reveal" href="manifesto.html">
+          <div class="photo-frame">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Manifesto photo" onerror="this.style.display='none'">
+          </div>
+          <div class="preview-body">
+            <h3>Manifesto</h3>
+            <p>Our overall vision and values.</p>
+          </div>
+        </a>
+        <a class="preview-card reveal" href="policies.html">
+          <div class="photo-frame">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Policies photo" onerror="this.style.display='none'">
+          </div>
+          <div class="preview-body">
+            <h3>Policies</h3>
+            <p>What we'd change, and how.</p>
+          </div>
+        </a>
+        <a class="preview-card reveal" href="coalition.html">
+          <div class="photo-frame">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Coalition photo" onerror="this.style.display='none'">
+          </div>
+          <div class="preview-body">
+            <h3>Coalition</h3>
+            <p>Who we could govern alongside.</p>
+          </div>
+        </a>
+        <a class="preview-card reveal" href="team.html">
+          <div class="photo-frame">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Team photo" onerror="this.style.display='none'">
+          </div>
+          <div class="preview-body">
+            <h3>Team</h3>
+            <p>The people standing for us.</p>
+          </div>
+        </a>
+      </div>
+
+      <nav class="page-flow" aria-label="Page navigation">
+        <a class="next" href="manifesto.html">Continue to our manifesto &rarr;</a>
+      </nav>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER — identical block at the bottom of every page.
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <!-- EDIT: party name, repeated in the footer -->
+      <strong>Party Name</strong>
+      <!-- EDIT: short footer note -->
+      <span>This is a model political party website, created for a school project.</span>
+    </div>
+    <div>
+      <!-- EDIT: optional contact placeholder, or delete this line -->
+      <span>Contact: name@example.com</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

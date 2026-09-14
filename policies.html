@@ -1,0 +1,181 @@
+<!-- This page shares styles.css and script.js with the rest of the
+     site, and follows the same EDIT / REPEATABLE comment system.
+     See index.html for the full editing guide. -->
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- EDIT: the text below appears in the browser tab -->
+<title>Policies — Party Name</title>
+<meta name="description" content="Model political party website, built for a school project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <div class="logo-frame">
+        <span class="logo-fallback">LOGO</span>
+        <img src="" alt="Party logo" onerror="this.style.display='none'">
+      </div>
+      <span class="brand-name">Party Name</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+
+    <nav aria-label="Main">
+      <ul class="nav-links" id="primary-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="manifesto.html">Manifesto</a></li>
+        <li><a href="policies.html">Policies</a></li>
+        <li><a href="coalition.html">Coalition</a></li>
+        <li><a href="team.html">Team</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <header class="page-header">
+    <div class="container">
+      <svg class="mark-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M6.5 12.5l3.5 3.5 7-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>Policies</h1>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- EDIT: a wide photo for the top of the policies page. -->
+      <div class="photo-frame page-banner reveal">
+        <span class="frame-label">Photo</span>
+        <img src="" alt="Photo for the policies page" onerror="this.style.display='none'">
+      </div>
+
+      <div class="section-heading">
+        <svg class="mark-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M6.5 12.5l3.5 3.5 7-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h2>Current policies — and why they don't work</h2>
+      </div>
+
+      <!-- EDIT: each block below pairs an existing/current policy with
+           your party's critique of it, plus a small photo.
+           REPEATABLE BLOCK — to add another pair, copy one whole
+           <div class="critique"> ... </div> block, paste it below the
+           last one, then edit the text (and image) inside your copy. -->
+      <div class="critique-list stagger">
+        <div class="critique reveal">
+          <div class="photo-frame card-media">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Photo representing this policy" onerror="this.style.display='none'">
+          </div>
+          <div class="critique-body">
+            <p class="critique-label">Current policy</p>
+            <p class="critique-text">Name and briefly describe an existing government policy.</p>
+            <p class="critique-label">Why it doesn't work</p>
+            <p class="critique-text">Explain the problem with this policy and who it affects.</p>
+          </div>
+        </div>
+        <div class="critique reveal">
+          <div class="photo-frame card-media">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Photo representing this policy" onerror="this.style.display='none'">
+          </div>
+          <div class="critique-body">
+            <p class="critique-label">Current policy</p>
+            <p class="critique-text">Name and briefly describe a second existing government policy.</p>
+            <p class="critique-label">Why it doesn't work</p>
+            <p class="critique-text">Explain why this policy falls short and who it affects.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-heading spaced-top">
+        <svg class="mark-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M6.5 12.5l3.5 3.5 7-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h2>Our policy areas</h2>
+      </div>
+
+      <!-- EDIT: two expandable, long-form policy areas, each with its
+           own banner photo. Click a title to expand or collapse it.
+           Each has three parts — Overview, Why it matters, and How
+           we'll do it — so there's room for a full written policy,
+           not just a short summary. Copy one whole
+           <div class="policy-card">...</div> block if you want to
+           add a third policy area. -->
+      <div class="policy-card reveal">
+        <div class="photo-frame card-media">
+          <span class="frame-label">Photo</span>
+          <img src="" alt="Photo for this policy area" onerror="this.style.display='none'">
+        </div>
+        <details class="policy-area" open>
+          <summary>Policy area 1 title <span class="toggle-mark" aria-hidden="true"></span></summary>
+          <div class="policy-content">
+            <h4>Overview</h4>
+            <p>Describe this policy in plain terms and who it helps.</p>
+            <h4>Why it matters</h4>
+            <p>Explain the problem this policy solves and why it's urgent right now.</p>
+            <h4>How we'll do it</h4>
+            <p>Explain how you would implement this policy — funding, timeline, and the key steps involved.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="policy-card reveal">
+        <div class="photo-frame card-media">
+          <span class="frame-label">Photo</span>
+          <img src="" alt="Photo for this policy area" onerror="this.style.display='none'">
+        </div>
+        <details class="policy-area">
+          <summary>Policy area 2 title <span class="toggle-mark" aria-hidden="true"></span></summary>
+          <div class="policy-content">
+            <h4>Overview</h4>
+            <p>Describe this second policy in plain terms and who it helps.</p>
+            <h4>Why it matters</h4>
+            <p>Explain the problem this policy solves and why it's a priority.</p>
+            <h4>How we'll do it</h4>
+            <p>Explain how you would implement this policy — funding, timeline, and the key steps involved.</p>
+          </div>
+        </details>
+      </div>
+
+      <nav class="page-flow" aria-label="Page navigation">
+        <a class="prev" href="manifesto.html">&larr; Manifesto</a>
+        <a class="next" href="coalition.html">Coalition &rarr;</a>
+      </nav>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <strong>Party Name</strong>
+      <span>This is a model political party website, created for a school project.</span>
+    </div>
+    <div>
+      <span>Contact: name@example.com</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

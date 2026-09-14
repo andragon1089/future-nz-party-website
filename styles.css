@@ -1,0 +1,314 @@
+/* ==============================================================
+   MODEL NZ POLITICAL PARTY WEBSITE — SHARED STYLES
+   ==============================================================
+   This one file controls the look of every page (index.html,
+   manifesto.html, policies.html, coalition.html, team.html).
+   Change a colour or font here and it updates the whole site.
+   See index.html for the full content-editing guide.
+   ============================================================== */
+
+/* ---------- COLOUR & FONT VARIABLES ---------- */
+:root{
+  --navy: #0B2545;        /* primary dark navy — nav, hero, footer */
+  --ink: #1B2A41;         /* body text colour */
+  --gold: #C7A034;        /* accent gold — borders, icons, rules */
+  --gold-dark: #8C6D1F;   /* deeper gold — text-safe on light backgrounds */
+  --bg: #EAF2FA;          /* light blue page background */
+  --panel: #FFFFFF;       /* white section / card background */
+  --line: #D3E1F0;        /* subtle border colour on light backgrounds */
+  --line-on-navy: rgba(255,255,255,0.22);
+  --radius: 3px;
+  --nav-height: 76px;
+  --font-head: 'Fraunces', Georgia, serif;
+  --font-body: 'Public Sans', Arial, sans-serif;
+}
+
+/* Smooth cross-fade when moving between pages (supporting browsers only —
+   older browsers simply navigate instantly, nothing breaks). */
+@view-transition{ navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root){
+  animation-duration: 0.38s;
+  animation-timing-function: cubic-bezier(.4,0,.2,1);
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  *, *::before, *::after{
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  ::view-transition-old(root), ::view-transition-new(root){ animation: none !important; }
+}
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+}
+h1,h2,h3,h4{ font-family: var(--font-head); color: var(--navy); margin: 0 0 0.5em; font-weight: 700; line-height: 1.15; }
+p{ margin: 0 0 1em; }
+a{ color: inherit; }
+img{ max-width: 100%; display: block; }
+ul{ margin: 0; }
+
+:focus-visible{ outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.skip-link{
+  position: absolute; left: -999px; top: 0;
+  background: var(--navy); color: #fff; padding: 10px 18px;
+  z-index: 1000; border-radius: 0 0 4px 0; font-weight: 600; text-decoration: none;
+}
+.skip-link:focus{ left: 0; }
+
+section[id]{ scroll-margin-top: calc(var(--nav-height) + 14px); }
+
+/* ---------- SCROLL-REVEAL (smooth fade/slide as content enters view) ---------- */
+.reveal{ opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.is-visible{ opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity: 1; transform: none; transition: none; }
+}
+/* staggered cascade for grids/lists — add class="stagger" to the container */
+.stagger > .reveal:nth-child(1){ transition-delay: 0s; }
+.stagger > .reveal:nth-child(2){ transition-delay: .07s; }
+.stagger > .reveal:nth-child(3){ transition-delay: .14s; }
+.stagger > .reveal:nth-child(4){ transition-delay: .21s; }
+.stagger > .reveal:nth-child(5){ transition-delay: .28s; }
+.stagger > .reveal:nth-child(6){ transition-delay: .35s; }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.site-nav{ position: sticky; top: 0; z-index: 100; background: var(--navy); border-bottom: 3px solid var(--gold); }
+.nav-inner{
+  max-width: 1120px; margin-inline: auto; padding-inline: clamp(20px,5vw,32px);
+  height: var(--nav-height);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.brand{ display: flex; align-items: center; gap: 12px; min-width: 0; text-decoration: none; }
+
+.logo-frame{
+  position: relative; width: 44px; height: 44px; flex: none;
+  border: 1.5px dashed var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.05);
+}
+.logo-frame .logo-fallback{ font-size: 9px; letter-spacing: 0.04em; color: var(--gold); font-weight: 600; }
+.logo-frame img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #fff; }
+
+.brand-name{
+  font-family: var(--font-head); font-weight: 700; color: #fff;
+  font-size: clamp(16px,2.4vw,20px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.nav-toggle{ display: none; }
+
+.nav-links{ list-style: none; display: flex; gap: clamp(10px,2vw,28px); margin: 0; padding: 0; }
+.nav-links a{
+  display: inline-block; text-decoration: none; color: #EAF2FA; font-weight: 500; font-size: 15px;
+  padding: 6px 2px; border-bottom: 2px solid transparent; transition: border-color .2s ease, color .2s ease;
+}
+.nav-links a:hover, .nav-links a:focus-visible{ border-bottom-color: var(--gold); color: #fff; }
+.nav-links a.current{ color: #fff; border-bottom-color: var(--gold); }
+
+@media (max-width: 760px){
+  .nav-toggle{
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 0;
+  }
+  .nav-toggle .bar{ width: 22px; height: 2px; background: #fff; display: block; transition: transform .2s ease, opacity .2s ease; }
+  .nav-links{
+    position: absolute; top: var(--nav-height); left: 0; right: 0;
+    background: var(--navy); flex-direction: column; gap: 0;
+    max-height: 0; overflow: hidden; border-bottom: 0 solid var(--gold);
+    transition: max-height 0.3s ease;
+  }
+  .nav-links.open{ max-height: 360px; border-bottom-width: 3px; }
+  .nav-links a{ display: block; padding: 14px clamp(20px,5vw,32px); border-bottom: 1px solid var(--line-on-navy); }
+}
+
+/* ============================================================
+   SHARED LAYOUT / HEADINGS
+   ============================================================ */
+.section{ padding-block: clamp(56px,8vw,96px); }
+.section-white{ background: var(--panel); }
+.container{ max-width: 1120px; margin-inline: auto; padding-inline: clamp(20px,5vw,32px); }
+
+.section-heading{ display: flex; align-items: center; gap: 12px; margin-bottom: 1.2em; }
+.section-heading.spaced-top{ margin-top: 2.6em; }
+.mark-icon{ width: 26px; height: 26px; color: var(--gold); flex: none; }
+.section-heading h2{ margin: 0; font-size: clamp(24px,3.4vw,34px); }
+
+/* ============================================================
+   IMAGE PLACEHOLDER FRAMES
+   (empty src="" + onerror hides broken-image icon — see index.html
+   for how to add a real photo)
+   ============================================================ */
+.photo-frame{
+  position: relative; background: var(--panel); border: 1.5px dashed var(--gold-dark);
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.photo-frame .frame-label{ font-size: 13px; color: var(--gold-dark); font-weight: 600; text-align: center; padding: 0 10px; }
+.photo-frame img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.photo-frame:hover img{ transform: scale(1.04); }
+
+/* full-width banner used near the top of every content page */
+.page-banner{ aspect-ratio: 21/7; margin-block: clamp(28px,5vw,48px); }
+@media (max-width: 640px){ .page-banner{ aspect-ratio: 4/3; } }
+
+/* small square/rectangle image used inside a card */
+.card-media{ margin-bottom: 14px; }
+
+/* ============================================================
+   PAGE HEADER (top banner on every page except Home)
+   ============================================================ */
+.page-header{ position: relative; background: var(--navy); color: #fff; overflow: hidden; padding-block: clamp(44px,7vw,80px); }
+.page-header .container{ display: flex; align-items: center; gap: 14px; }
+.page-header .mark-icon{ color: var(--gold); width: 30px; height: 30px; }
+.page-header h1{ color: #fff; margin: 0; font-size: clamp(30px,4.4vw,46px); }
+
+/* ============================================================
+   HERO (Home page only)
+   ============================================================ */
+.hero{ position: relative; background: var(--navy); color: #fff; overflow: hidden; padding-block: clamp(72px,12vw,140px); }
+.hero-watermark{
+  position: absolute; right: clamp(-30px,-2vw,10px); top: 50%; transform: translateY(-50%);
+  width: clamp(220px,34vw,420px); height: auto; color: var(--gold); opacity: 0.12; pointer-events: none;
+}
+.hero-inner{ position: relative; max-width: 640px; }
+.hero h1{ color: #fff; font-size: clamp(40px,7vw,72px); margin-bottom: 0.2em; }
+.hero .tagline{ font-size: clamp(18px,2.4vw,22px); color: #EAF2FA; max-width: 46ch; margin-bottom: 1.3em; font-weight: 400; }
+.hero-rule{ width: 96px; height: 4px; background: var(--gold); margin-bottom: 1.3em; }
+.hero .hero-sub{ color: rgba(255,255,255,0.85); max-width: 58ch; font-size: 16px; margin-bottom: 0; }
+
+/* ============================================================
+   HOME — explore grid linking to the other pages
+   ============================================================ */
+.preview-grid{ display: grid; grid-template-columns: repeat(auto-fill,minmax(230px,1fr)); gap: 22px; }
+.preview-card{
+  display: block; text-decoration: none; color: inherit;
+  background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--gold);
+  border-radius: var(--radius); overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.preview-card:hover, .preview-card:focus-visible{
+  transform: translateY(-4px); box-shadow: 0 10px 24px rgba(11,37,69,0.14); border-top-color: var(--gold-dark);
+}
+.preview-card .photo-frame{ aspect-ratio: 4/3; border-width: 0 0 1px 0; border-radius: 0; }
+.preview-card .preview-body{ padding: 16px 18px 20px; }
+.preview-card h3{ font-size: 18px; margin-bottom: 0.3em; }
+.preview-card p{ font-size: 14px; margin: 0; opacity: 0.85; }
+
+/* ============================================================
+   MANIFESTO
+   ============================================================ */
+.prose{ max-width: 68ch; border-left: 3px solid var(--gold); padding-left: clamp(16px,3vw,28px); margin-bottom: 2.4em; }
+.prose p{ font-size: 17px; margin: 0; }
+
+.manifesto-block{ display: flex; gap: clamp(20px,4vw,32px); align-items: center; margin-bottom: 2.6em; max-width: 78ch; }
+.manifesto-block:nth-child(even){ flex-direction: row-reverse; }
+.manifesto-block .manifesto-image{ flex: 0 0 38%; aspect-ratio: 4/3; margin: 0; }
+.manifesto-block p{ flex: 1; margin: 0; font-size: 17px; }
+@media (max-width: 700px){
+  .manifesto-block, .manifesto-block:nth-child(even){ flex-direction: column; }
+  .manifesto-block .manifesto-image{ flex: none; width: 100%; }
+}
+
+/* ============================================================
+   POLICIES
+   ============================================================ */
+.critique-list{ display: grid; gap: 18px; margin-bottom: 0.5em; }
+.critique{
+  display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start;
+  background: var(--bg); border: 1px solid var(--line); border-left: 4px solid var(--gold-dark);
+  padding: 20px 24px; border-radius: var(--radius);
+}
+.critique .card-media{ width: 72px; height: 72px; flex: none; margin: 0; }
+.critique .critique-body{ flex: 1 1 220px; min-width: 0; }
+.critique-label{ font-weight: 700; color: var(--navy); font-size: 13px; margin-bottom: 0.2em; }
+.critique-text{ margin-bottom: 1em; }
+.critique-text:last-child{ margin-bottom: 0; }
+@media (max-width: 480px){
+  .critique .card-media{ width: 100%; height: auto; aspect-ratio: 16/9; }
+}
+
+.policy-card{ border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); overflow: hidden; margin-bottom: 20px; }
+.policy-card .card-media{ margin: 0; border-radius: 0; border-width: 0 0 1px 0; aspect-ratio: 21/8; }
+.policy-area summary{
+  list-style: none; cursor: pointer; padding: 18px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  font-family: var(--font-head); font-weight: 700; color: var(--navy); font-size: 19px;
+}
+.policy-area summary::-webkit-details-marker{ display: none; }
+.policy-area summary .toggle-mark{ font-family: var(--font-body); font-size: 24px; color: var(--gold-dark); flex: none; line-height: 1; }
+.policy-area summary .toggle-mark::after{ content: "+"; }
+.policy-area[open] summary .toggle-mark::after{ content: "\2013"; }
+.policy-area[open] summary{ border-bottom: 1px solid var(--line); }
+.policy-content{ padding: 4px 24px 24px; }
+.policy-content h4{
+  font-family: var(--font-body); font-size: 14px; letter-spacing: 0.01em;
+  color: var(--gold-dark); margin-top: 1.3em; margin-bottom: 0.3em; font-weight: 700;
+}
+.policy-content h4:first-of-type{ margin-top: 0.6em; }
+.policy-content p{ font-size: 15.5px; }
+
+/* ============================================================
+   COALITION
+   ============================================================ */
+.coalition-grid{ display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 22px; }
+.coalition-card{
+  background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--gold);
+  padding: 22px 22px 24px; border-radius: var(--radius);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.coalition-card:hover{ transform: translateY(-3px); box-shadow: 0 10px 22px rgba(11,37,69,0.1); }
+.coalition-card .card-media{ width: 64px; height: 64px; }
+.coalition-card h3{ font-size: 19px; margin-bottom: 0.4em; }
+.coalition-card p{ font-size: 15px; margin: 0; }
+
+/* ============================================================
+   TEAM
+   ============================================================ */
+.photo-strip{ display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 3em; }
+.strip-frame{ flex: none; width: clamp(140px,22vw,190px); }
+.strip-frame .photo-frame{ aspect-ratio: 4/3; }
+.frame-caption{ font-size: 12px; color: var(--navy); opacity: 0.7; margin-top: 6px; text-align: center; }
+
+.team-grid{ display: grid; grid-template-columns: repeat(auto-fill,minmax(230px,1fr)); gap: 26px; }
+.team-card{ background: var(--bg); border: 1px solid var(--line); padding: 20px; border-radius: var(--radius); transition: transform .25s ease, box-shadow .25s ease; }
+.team-card:hover{ transform: translateY(-3px); box-shadow: 0 10px 22px rgba(11,37,69,0.1); }
+.team-card .photo-frame{ aspect-ratio: 1/1; margin-bottom: 14px; }
+.team-card h3{ font-size: 18px; margin-bottom: 0.15em; }
+.team-card .role{ font-weight: 600; color: var(--gold-dark); font-size: 13px; margin-bottom: 0.6em; }
+.team-card .bio{ font-size: 14.5px; margin: 0; }
+
+/* ============================================================
+   PAGE FLOW (prev / next links at the bottom of each page)
+   ============================================================ */
+.page-flow{
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  margin-top: clamp(40px,6vw,64px); padding-top: 24px; border-top: 1px solid var(--line);
+}
+.page-flow a{
+  text-decoration: none; color: var(--navy); font-weight: 600; font-family: var(--font-head); font-size: 16px;
+  padding: 8px 4px; border-bottom: 2px solid transparent; transition: border-color .2s ease, color .2s ease;
+}
+.page-flow a:hover, .page-flow a:focus-visible{ border-bottom-color: var(--gold); color: var(--gold-dark); }
+.page-flow .next{ margin-left: auto; text-align: right; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer{ background: var(--navy); color: rgba(255,255,255,0.85); padding-block: 40px; border-top: 3px solid var(--gold); }
+.footer-inner{
+  max-width: 1120px; margin-inline: auto; padding-inline: clamp(20px,5vw,32px);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; font-size: 14px;
+}
+.footer-inner strong{ display: block; color: #fff; font-family: var(--font-head); font-size: 16px; margin-bottom: 4px; }

@@ -1,0 +1,182 @@
+<!-- This page shares styles.css and script.js with the rest of the
+     site, and follows the same EDIT / REPEATABLE comment system.
+     See index.html for the full editing guide. -->
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- EDIT: the text below appears in the browser tab -->
+<title>Team — Party Name</title>
+<meta name="description" content="Model political party website, built for a school project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <div class="logo-frame">
+        <span class="logo-fallback">LOGO</span>
+        <img src="" alt="Party logo" onerror="this.style.display='none'">
+      </div>
+      <span class="brand-name">Party Name</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+
+    <nav aria-label="Main">
+      <ul class="nav-links" id="primary-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="manifesto.html">Manifesto</a></li>
+        <li><a href="policies.html">Policies</a></li>
+        <li><a href="coalition.html">Coalition</a></li>
+        <li><a href="team.html">Team</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <header class="page-header">
+    <div class="container">
+      <svg class="mark-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M6.5 12.5l3.5 3.5 7-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>Our team</h1>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- EDIT: a strip of campaign/party photos.
+           REPEATABLE BLOCK — to add another photo, copy one whole
+           <div class="strip-frame"> ... </div> block, paste it after
+           the last one, then edit or add an image path inside it
+           (see the image note in index.html). -->
+      <div class="photo-strip stagger">
+        <div class="strip-frame reveal">
+          <div class="photo-frame">
+            <span class="frame-label">Campaign photo</span>
+            <img src="" alt="Campaign photo" onerror="this.style.display='none'">
+          </div>
+          <p class="frame-caption">Campaign photo</p>
+        </div>
+        <div class="strip-frame reveal">
+          <div class="photo-frame">
+            <span class="frame-label">Campaign photo</span>
+            <img src="" alt="Campaign photo" onerror="this.style.display='none'">
+          </div>
+          <p class="frame-caption">Campaign photo</p>
+        </div>
+        <div class="strip-frame reveal">
+          <div class="photo-frame">
+            <span class="frame-label">Campaign photo</span>
+            <img src="" alt="Campaign photo" onerror="this.style.display='none'">
+          </div>
+          <p class="frame-caption">Campaign photo</p>
+        </div>
+        <div class="strip-frame reveal">
+          <div class="photo-frame">
+            <span class="frame-label">Campaign photo</span>
+            <img src="" alt="Campaign photo" onerror="this.style.display='none'">
+          </div>
+          <p class="frame-caption">Campaign photo</p>
+        </div>
+        <div class="strip-frame reveal">
+          <div class="photo-frame">
+            <span class="frame-label">Campaign photo</span>
+            <img src="" alt="Campaign photo" onerror="this.style.display='none'">
+          </div>
+          <p class="frame-caption">Campaign photo</p>
+        </div>
+        <div class="strip-frame reveal">
+          <div class="photo-frame">
+            <span class="frame-label">Campaign photo</span>
+            <img src="" alt="Campaign photo" onerror="this.style.display='none'">
+          </div>
+          <p class="frame-caption">Campaign photo</p>
+        </div>
+      </div>
+
+      <!-- EDIT: individual team member cards — name, role, short bio,
+           and an optional photo.
+           REPEATABLE BLOCK — to add another member, copy one whole
+           <article class="team-card"> ... </article> block, paste it
+           after the last one, then edit the text (and image, if you
+           want one) inside your copy. -->
+      <div class="team-grid stagger">
+        <article class="team-card reveal">
+          <div class="photo-frame">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Photo of this team member" onerror="this.style.display='none'">
+          </div>
+          <h3>Full name</h3>
+          <p class="role">Role, e.g. Party Leader</p>
+          <p class="bio">One or two sentences about this person's background and why they're standing.</p>
+        </article>
+
+        <article class="team-card reveal">
+          <div class="photo-frame">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Photo of this team member" onerror="this.style.display='none'">
+          </div>
+          <h3>Full name</h3>
+          <p class="role">Role, e.g. Deputy Leader</p>
+          <p class="bio">One or two sentences about this person's background and why they're standing.</p>
+        </article>
+
+        <article class="team-card reveal">
+          <div class="photo-frame">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Photo of this team member" onerror="this.style.display='none'">
+          </div>
+          <h3>Full name</h3>
+          <p class="role">Role, e.g. Policy Spokesperson</p>
+          <p class="bio">One or two sentences about this person's background and why they're standing.</p>
+        </article>
+
+        <article class="team-card reveal">
+          <div class="photo-frame">
+            <span class="frame-label">Photo</span>
+            <img src="" alt="Photo of this team member" onerror="this.style.display='none'">
+          </div>
+          <h3>Full name</h3>
+          <p class="role">Role, e.g. Candidate</p>
+          <p class="bio">One or two sentences about this person's background and why they're standing.</p>
+        </article>
+      </div>
+
+      <nav class="page-flow" aria-label="Page navigation">
+        <a class="prev" href="coalition.html">&larr; Coalition</a>
+        <a class="next" href="index.html">Home &rarr;</a>
+      </nav>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <strong>Party Name</strong>
+      <span>This is a model political party website, created for a school project.</span>
+    </div>
+    <div>
+      <span>Contact: name@example.com</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
